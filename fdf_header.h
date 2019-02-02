@@ -20,4 +20,17 @@ typedef struct  s_map
 }               t_map;
 
 
+
+typedef struct  s_main
+{
+    void        *mlx_ptr;
+	void	    *win_ptr;
+}               t_main;
+
+
+
+// Init some global var
+
+t_main          *g_main;
+
 #endif
