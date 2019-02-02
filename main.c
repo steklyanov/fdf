@@ -6,11 +6,12 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/02 15:20:13 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/02 17:25:57 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf_header.h"
+#include <stdio.h>
 
 // void	ft_putchar(char c)
 // {
@@ -53,24 +54,34 @@ int		main(int argc, char **argv)
 	char	*line;
 	char	*map;
 	t_map	map_info;
+	int		**int_map;
+	int		i;
 
+	i = 0;
 	init_map_info(&map_info);
 	map = ft_strnew(1);
 	fd = 0;
+	int_map = (int**)malloc(sizeof(int*) * 3);
 	if (argc == 2)
 	{
-		fd = open(argv[1], 0x0000);
+		fd = open(argv[1], O_RDONLY);
 		if (fd > 0)
 		{
-			while(get_next_line(fd, &line) == 0)
-					map = ft_strjoin(ft_strjoin(map, line), "\n");
-			
+			while(get_next_line(fd, &line) == 1)
+			{
+				int_map[i++] = ft_pridumat_name(line);
+				map = ft_strjoin(ft_strjoin(map, line), "\n");
+			}
+				
 		}
+		printf("%s", map);
 	}
 	else
 	{
 		write(1, "usage: ./fdf file\n", 19);
 	}
+	
+	
 
 	return (0);
 }

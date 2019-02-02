@@ -13,11 +13,18 @@ typedef struct  s_point
     int         color;
 }               t_point;
 
+
+// typedef struct  s_map
+// {
+//     int         **line;
+// };
+
 typedef struct  s_map
 {
     int         col;
     int         line;
 }               t_map;
 
+int         *ft_pridumat_name(char *str);
 
 #endif
