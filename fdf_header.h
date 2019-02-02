@@ -21,8 +21,9 @@ typedef struct  s_point
 
 typedef struct  s_map
 {
-    int         col;
-    int         line;
+    int         count_col;
+    int         count_line;
+    int         **line;
 }               t_map;
 
 int         *ft_pridumat_name(char *str);

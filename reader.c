@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/01 11:28:42 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/02 17:36:28 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/02 19:08:32 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ int		count_nb_digits(char *str)
 	return (count);
 }
 
+
 int         *ft_pridumat_name(char *str)
 {
     int     *res;
@@ -92,29 +93,21 @@ int         *ft_pridumat_name(char *str)
     char    *tmp;
     int     len;
 
-    printf("Im here");
-    len = 0;
+	len = 0;
     i = 0;
     j = 0;
     tmp = ft_strnew(0);
     if ((res = (int*)malloc(sizeof(int) * (count_nb_digits(str)))) == NULL)
         return (0);
-	printf("\nstr   %s\n ", str);
     while (str[i])
     {
         while (str[i] != ' ' && str[i])
-		{
-			tmp = ft_strncat(tmp, &str[i], 1);
-			i++;
-		}
-		printf("tmp = %s\n", tmp);
+			tmp = ft_strncat(tmp, &str[i++], 1);
         res[j++] = ft_atoi(tmp);
 		free(tmp);
 		tmp = ft_strnew(0);
 		while (str[i] == ' ' && str[i])
 			i++;
     }
-	while (j != 0)
-		printf("%d ", res[j--]);
     return(res);
 }

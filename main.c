@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/02 17:25:57 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/02 19:49:31 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,7 @@
 // }
 
 
-void	init_map_info(t_map *map_info)
-{
-	map_info->col = 0;
-	map_info->line = 0;
-}
+
 
 int		main(int argc, char **argv)
 {
@@ -54,14 +50,13 @@ int		main(int argc, char **argv)
 	char	*line;
 	char	*map;
 	t_map	map_info;
-	int		**int_map;
-	int		i;
+	// int		**int_map;
+	// int		i;
 
-	i = 0;
-	init_map_info(&map_info);
+	map_info.count_line = 0;
 	map = ft_strnew(1);
 	fd = 0;
-	int_map = (int**)malloc(sizeof(int*) * 3);
+	map_info.line = (int**)malloc(sizeof(int*) * 120);
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
@@ -69,12 +64,21 @@ int		main(int argc, char **argv)
 		{
 			while(get_next_line(fd, &line) == 1)
 			{
-				int_map[i++] = ft_pridumat_name(line);
+				map_info.line[map_info.count_line++] = ft_pridumat_name(line);
 				map = ft_strjoin(ft_strjoin(map, line), "\n");
 			}
-				
 		}
-		printf("%s", map);
+		//printf("%s", map);
+		printf("%d", map_info.line[6][1]);
+		// while (map_info.count_line > 0)
+		// {
+		// 	while(*map_info.line[map_info.count_line])
+		// 	{
+		// 		printf("trulllly");
+		// 		printf("%d ", *map_info.line[map_info.count_line]);
+		// 	}
+		// 	map_info.count_line--;
+		// }
 	}
 	else
 	{
