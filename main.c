@@ -15,6 +15,7 @@
 
 
 
+
 int		deal_key(int key, void *param)
 {
 	param--;
@@ -32,7 +33,37 @@ void init_fdf()
 {
 	g_main = ft_memalloc(sizeof(g_main));
 }
+	int 	fd;
+	char	*line;
+	char	*map;
+	t_map	map_info;
+	int		**int_map;
+	int		i;
 
+	i = 0;
+	init_map_info(&map_info);
+	map = ft_strnew(1);
+	fd = 0;
+	int_map = (int**)malloc(sizeof(int*) * 3);
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		if (fd > 0)
+		{
+			while(get_next_line(fd, &line) == 1)
+			{
+				int_map[i++] = ft_pridumat_name(line);
+				map = ft_strjoin(ft_strjoin(map, line), "\n");
+			}
+				
+		}
+		printf("%s", map);
+	}
+	else
+	{
+		write(1, "usage: ./fdf file\n", 19);
+	}
+	
 
 
 int     main()
