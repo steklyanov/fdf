@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/02 11:30:49 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/02 15:20:13 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		main(int argc, char **argv)
 	fd = 0;
 	if (argc == 2)
 	{
-		fd = open(argv[1], O_RDONLY);
+		fd = open(argv[1], 0x0000);
 		if (fd > 0)
 		{
 			while(get_next_line(fd, &line) == 0)
