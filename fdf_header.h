@@ -13,11 +13,28 @@ typedef struct  s_point
     int         color;
 }               t_point;
 
+
 typedef struct  s_map
 {
     int         col;
     int         line;
 }               t_map;
+
+
+typedef struct  s_main
+{
+    void        *mlx_ptr;
+	void	    *win_ptr;
+}               t_main;
+
+
+
+// Init some global var
+
+t_main          *g_main;
+
+
+int         *ft_pridumat_name(char *str);
 
 
 #endif
