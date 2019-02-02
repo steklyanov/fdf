@@ -27,5 +27,6 @@ typedef struct  s_map
 }               t_map;
 
 int         *ft_pridumat_name(char *str);
+int			keep_rows(int rows);
 
 #endif
