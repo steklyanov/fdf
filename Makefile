@@ -1,7 +1,8 @@
 NAME = fdf
 FLAGS = -Wall -Wextra -Werror
 SRC =	reader.c \
-		main.c
+		main.c 
+
 LIBS = -L libft/  -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
 OBJ = $(SRC:.c=.o)
 
@@ -9,7 +10,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	make -C libft/
-	gcc -g $(FLAGS) $(LIBS) $(SRC) -o $(NAME)
+	gcc -g $(FLAGS) $(LIBS) $(SRC) -I fdf_header.h -o $(NAME)
 
 clean:
 	rm -rf $(OBJ)

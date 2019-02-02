@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/01 11:39:25 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/02 11:30:49 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,32 @@
 // 	mlx_loop(mlx_ptr);
 // }
 
+
+void	init_map_info(t_map *map_info)
+{
+	map_info->col = 0;
+	map_info->line = 0;
+}
+
 int		main(int argc, char **argv)
 {
+	int 	fd;
+	char	*line;
+	char	*map;
+	t_map	map_info;
+
+	init_map_info(&map_info);
+	map = ft_strnew(1);
+	fd = 0;
 	if (argc == 2)
 	{
-		
+		fd = open(argv[1], O_RDONLY);
+		if (fd > 0)
+		{
+			while(get_next_line(fd, &line) == 0)
+					map = ft_strjoin(ft_strjoin(map, line), "\n");
+			
+		}
 	}
 	else
 	{
