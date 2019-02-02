@@ -35,6 +35,6 @@ t_main          *g_main;
 
 
 int         *ft_pridumat_name(char *str);
-
+void        put_point_to_image(char *image_data, int x, int y, int color);
 
 #endif

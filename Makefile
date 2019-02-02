@@ -1,6 +1,7 @@
 NAME = fdf
 FLAGS = -Wall -Wextra -Werror
-SRC =	reader.c \
+SRC =	drawing.c\
+		reader.c \
 		main.c 
 
 LIBS = -L /usr/local/lib -lmlx -framework OpenGL -framework AppKit
