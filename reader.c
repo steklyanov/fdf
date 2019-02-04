@@ -51,8 +51,6 @@ void         ft_pridumat_name(char *str, t_map *map)
     i = 0;
     j = 0;
     tmp = ft_strnew(0);
-	// printf("%d ", map->count_line);
-	 // = map->count_line + 1;
 	map->count_col = count_nb_digits(str);
     if ((res = (int*)malloc(sizeof(int) * (map->count_col))) == NULL)
         return ;
