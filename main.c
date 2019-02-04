@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/04 15:09:41 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/04 16:58:35 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,30 @@ int		deal_key(int key, void *param)
 	return (0);
 }
 
+void	init_main(t_main *main)
+{
+	main = ft_memalloc(sizeof(t_main));
+	main->mlx_ptr = mlx_init();
+	main->win_ptr = mlx_new_window(main->mlx_ptr, 1000, 1000, "mlx 42");
+
+
+}
+
 int		main(int argc, char **argv)
 {
 	int 	fd;
 	char	*line;
 	t_map	map;
-	// int		i;
-	// int 	j;
-	void	*mlx_ptr;
-	void	*win_ptr;
-	void *img_ptr;
-	char *data;
+	//t_point	points;
+	t_main	main;
+
+	init_main(&main);
 	int bits_per_pixel = 8;
 	int size_line = 1000;
 	int endian = 0;
 
-	mlx_ptr = mlx_init();
-	win_ptr = mlx_new_window(mlx_ptr, 1000, 1000, "mlx 42");
-
+	// main.mlx_ptr = mlx_init();
+	// main.win_ptr = mlx_new_window(main.mlx_ptr, 2000, 2000, "mlx 42");
 
 
 	map.count_line = 0;
@@ -75,28 +81,25 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		fd = open(argv[1], O_RDONLY);
-		// printf("%d", fd);
 		if (fd > 0)
 		{
 			while(get_next_line(fd, &line) == 1)
-			{
 				ft_pridumat_name(line, &map);
-			}
 		}
-			// Work with IMG
-		img_ptr = mlx_new_image(mlx_ptr, 1000, 1000);
-		data = mlx_get_data_addr(img_ptr, &bits_per_pixel, &size_line, &endian);
+		// Work with IMG
+		main.img_ptr = mlx_new_image(main.mlx_ptr, 1000, 1000);
+		main.data = mlx_get_data_addr(main.img_ptr, &bits_per_pixel, &size_line, &endian);
 		
-		draw_line(&map, 100, 100, 400, 300, data);
+		draw_line(&map, 100, 100, 400, 300, main.data);
 
-		mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);
+		mlx_put_image_to_window(main.mlx_ptr, main.win_ptr, main.img_ptr, 0, 0);
 
-		mlx_string_put(mlx_ptr, win_ptr, 10, 10, 0xFF0080, "lol");
-		mlx_key_hook(win_ptr, deal_key, (void*)0);
+		mlx_string_put(main.mlx_ptr, main.win_ptr, 10, 10, 0xFF0080, "lol");
+		mlx_key_hook(main.win_ptr, deal_key, (void*)0);
 	}
 	else
 		write(1, "usage: ./fdf file\n", 19);
-	mlx_loop(mlx_ptr);
+	mlx_loop(main.mlx_ptr);
 
 }
 
@@ -114,7 +117,12 @@ int			ft_abs(int a)
 	return (a > 0 ? a: -a);
 }
 
-void		draw_line(t_map *map, int x1, int y1, int x2, int y2, char *image_data)//void *mlx_ptr, void *win_ptr)
+// void		draw_map(t_map *map, char *image_data)
+// {
+	
+// }
+
+void		draw_line(t_map *map, int x1, int y1, int x2, int y2, char *image_data)
 {
 	int		delta_x;
 	int		delta_y;
@@ -130,10 +138,8 @@ void		draw_line(t_map *map, int x1, int y1, int x2, int y2, char *image_data)//v
 	sign_y = y1 < y2 ? 1: -1;
 	error = delta_x - delta_y;
 	put_point_to_image(image_data, x2, y2, 0x00FFFFFF);
-	//mlx_pixel_put(mlx_ptr, win_ptr, x2, y2, 0x00FFFFFF);
 	while(x1 != x2 || y1 != y2)
 	{
-		//mlx_pixel_put(mlx_ptr, win_ptr, x1, y1, 0x00FFFFFF);
 		put_point_to_image(image_data, x1, y1, 0x00FFFFFF);
 		error2 = error * 2;
 		if (error2 > delta_y)

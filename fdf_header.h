@@ -23,12 +23,24 @@ typedef struct  s_point
 //     int         **line;
 // };
 
+
+
 typedef struct  s_map
 {
     int         count_col;
     int         count_line;
     int         **line;
 }               t_map;
+
+typedef struct  s_main
+{
+    void        *mlx_ptr;
+	void	    *win_ptr;
+    t_map       *map;
+    t_point     *point;
+    void        *img_ptr;
+	char        *data;
+}               t_main;
 
 void            ft_pridumat_name(char *str, t_map *map);
 int			    ft_abs(int a);
