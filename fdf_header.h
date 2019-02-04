@@ -5,9 +5,6 @@
 #include "libft/libft.h"
 #include <unistd.h>
 
-#define IMAGE_WIDTH 1000
-#define IMAGE_HEIGHT 1000
-#define SIZE_LEN 1000
 
 typedef struct  s_point
 {
@@ -34,6 +31,8 @@ typedef struct  s_map
 
 typedef struct  s_main
 {
+    int         image_hight;
+    int         image_weight;
     void        *mlx_ptr;
 	void	    *win_ptr;
     t_map       *map;
@@ -44,8 +43,8 @@ typedef struct  s_main
 
 void            ft_pridumat_name(char *str, t_map *map);
 int			    ft_abs(int a);
-void		draw_line(t_map *map, int x1, int y1, int x2, int y2, char *image_data);
-void    put_point_to_image(char *image_data, int x, int y, int color);
+void		draw_line(t_map *map, int x1, int y1, int x2, int y2, t_main *main);
+void    put_point_to_image(char *image_data, int x, int y, int color, t_main *main);
 void		draw_map(t_map *map, char *image_data);
 
 
