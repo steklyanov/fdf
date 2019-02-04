@@ -26,7 +26,9 @@ typedef struct  s_map
     int         **line;
 }               t_map;
 
-int         *ft_pridumat_name(char *str);
-int			keep_rows(int rows);
+void            ft_pridumat_name(char *str, t_map *map);
+int			    ft_abs(int a);
+void		    draw_line(t_map *map, int x1, int y1, int x2, int y2, void *mlx_ptr, void *win_ptr);
+
 
 #endif
