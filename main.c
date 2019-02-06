@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/06 15:44:19 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/06 15:46:51 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,13 +115,11 @@ int		main(int argc, char **argv)
 		main->img_ptr = mlx_new_image(main->mlx_ptr, main->image_weight, main->image_hight);
 		main->data = mlx_get_data_addr(main->img_ptr, &bits_per_pixel, &size_line, &endian);
 		demo_print_map(main);
-		// draw_line(main->map, 100, 100, 130, 120, main);
 
 		mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img_ptr, 0, 0);
 
 		
 
-		// mlx_string_put(main->mlx_ptr, main->win_ptr, 10, 10, 0xFF0080, "lol");
 		mlx_key_hook(main->win_ptr, deal_key, (void*)0);
 		
 	}
@@ -143,11 +141,7 @@ void	demo_print_map(t_main	*main)
 		j = 0;
 		while (j < main->map->count_col)
 		{
-			printf("im here");
 			put_point_to_image(main->data, main->map->line[i][j].x, main->map->line[i][j].y, 0x00FFFFFF, main);
-			// put_point_to_image(main->data, main->map->line[i][j].x, main->map->line[i][j].y, 0x00000000, main);
-			// main->map->line[i][j].x = 20 + step_line * i;
-			// main->map->line[i][j].y = 20 + step_line * j;
 			j++;
 		}
 		i++;
