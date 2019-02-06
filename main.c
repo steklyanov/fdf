@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/25 17:30:31 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/06 14:58:08 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/06 15:44:19 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_matrix(t_map *map)
 		j = 0;
 		while (j < map->count_col)
 		{
-			printf("%d ", map->line[i][j]);
+			printf("[%d,%d,%d ]", map->line[i][j].x, map->line[i][j].y, map->line[i][j].z);
 			// printf("%d:%d ", i, j);
 			j++;
 		}
@@ -52,12 +52,9 @@ t_main	*init_main(t_main *main)
 	main->mlx_ptr = mlx_init();
 
 	main->map = ft_memalloc(sizeof(t_map));
-	main->map->line = (int**)malloc(sizeof(int*) * 1200); // ToDo more num  !!!
+	main->map->line = (t_point**)malloc(sizeof(t_point*) * 1200); // ToDo more num  !!!
 	main->map->count_line = 0;
 	main->map->count_col = 0;
-
-	main->point = ft_memalloc(sizeof(t_point));
-	// main->point = (t_point**)
 
 	return (main);
 }
@@ -106,22 +103,27 @@ int		main(int argc, char **argv)
 			while(get_next_line(fd, &line) == 1)
 				ft_pridumat_name(line, main->map);
 		}
+
+
 		// Iint MIAN 
 		init_screen(main);
+		calc_point_position(main);
+		print_matrix(main->map);
 		main->win_ptr = mlx_new_window(main->mlx_ptr, main->image_hight, main->image_hight, "mlx 42");
 
 		// Work with IMG
 		main->img_ptr = mlx_new_image(main->mlx_ptr, main->image_weight, main->image_hight);
 		main->data = mlx_get_data_addr(main->img_ptr, &bits_per_pixel, &size_line, &endian);
-		
-		draw_line(main->map, 100, 100, 130, 120, main);
+		demo_print_map(main);
+		// draw_line(main->map, 100, 100, 130, 120, main);
 
 		mlx_put_image_to_window(main->mlx_ptr, main->win_ptr, main->img_ptr, 0, 0);
 
 		
 
-		mlx_string_put(main->mlx_ptr, main->win_ptr, 10, 10, 0xFF0080, "lol");
+		// mlx_string_put(main->mlx_ptr, main->win_ptr, 10, 10, 0xFF0080, "lol");
 		mlx_key_hook(main->win_ptr, deal_key, (void*)0);
+		
 	}
 	else
 		write(1, "usage: ./fdf file\n", 19);
@@ -130,4 +132,24 @@ int		main(int argc, char **argv)
 }
 
 
+void	demo_print_map(t_main	*main)
+{
+	int		i;
+	int		j;
 
+	i = 0;
+	while (i < main->map->count_line)
+	{
+		j = 0;
+		while (j < main->map->count_col)
+		{
+			printf("im here");
+			put_point_to_image(main->data, main->map->line[i][j].x, main->map->line[i][j].y, 0x00FFFFFF, main);
+			// put_point_to_image(main->data, main->map->line[i][j].x, main->map->line[i][j].y, 0x00000000, main);
+			// main->map->line[i][j].x = 20 + step_line * i;
+			// main->map->line[i][j].y = 20 + step_line * j;
+			j++;
+		}
+		i++;
+	}
+}
