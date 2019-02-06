@@ -6,7 +6,7 @@
 /*   By: mmraz <mmraz@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/04 19:55:28 by mmraz             #+#    #+#             */
-/*   Updated: 2019/02/04 19:56:34 by mmraz            ###   ########.fr       */
+/*   Updated: 2019/02/05 14:27:10 by mmraz            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,26 @@ int			ft_abs(int a)
 	return (a > 0 ? a: -a);
 }
 
-// void		draw_map(t_map *map, char *image_data)
-// {
-	
-// }
+#include <math.h>
+
+t_point	rotate(t_point p)
+{
+	t_point		v;
+	int			x;
+	int			y;
+	int			z;
+
+	x = p.x;
+	z = p.z;
+	v.x = cos(p.y) * x + sin(p.y) * z;
+	v.z = -sin(p.y) * x + cos(p.y) * z;
+	y = p.y;
+	z = v.z;
+	v.y = cos(p.x) * y - sin(p.x) * z;
+	v.z = sin(p.x) * y + cos(p.x) * z;
+	v.color = p.color;
+	return (v);
+}
 
 void		draw_line(t_map *map, int x1, int y1, int x2, int y2, t_main *main)
 {
